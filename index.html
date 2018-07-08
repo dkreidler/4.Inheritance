@@ -55,7 +55,9 @@
         // use another conditional to structure the last part of the
         // second sentence depending on whether the number of interests
         // is 1, 2, or 3
-        if (this.interests.length === 1) {
+        if (this.interests.length === 0) {
+            string += 'not much of anthing.';
+        } else if (this.interests.length === 1) {
             string += this.interests[0] + '.';
         } else if (this.interests.length === 2) {
             string += this.interests[0] + ' and ' + this.interests[1] + '.';
@@ -102,6 +104,18 @@
         }
         alert('Hello. My name is ' + prefix + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
     }
+    var teacher1 = new Teacher('Dustin', 'Kreidler', 41, 'male', ['physics', 'javascript'], 'crossfit');
+
+    function Student(first, last, age, gender, interests, subject) {
+        Teacher.call(this, first, last, age, gender, interests, subject);
+    }
+    Student.prototype = Object.create(Person.prototype);
+    Student.prototype.constructor = Student;
+
+    Student.prototype.greeting = function() {
+        alert('What\'s up? My name is ' + this.name.first + ' and I\'m ' + this.age + ' years old! I\'m in ' + this.subject + ' taught by ' + teacher1.name.last + '.');
+    }
+    var student1 = new Student('Abby', 'Kreidler', 6, 'female', ['arts', 'crafts'], '1st grade');
 </script>
 
 </html>
